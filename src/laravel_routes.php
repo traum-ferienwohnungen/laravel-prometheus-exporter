@@ -1,3 +1,3 @@
 <?php
 
-Route::get('metrics', \Tback\PrometheusExporter\LpeController::class . '@metrics')->name('metrics');
+Route::get('metrics', \Traum-ferienwohnungen\PrometheusExporter\LpeController::class . '@metrics')->name('metrics');

@@ -1,5 +1,5 @@
 <?php
-namespace Tback\PrometheusExporter;
+namespace Traum-Ferienwohnungen\PrometheusExporter;
 
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
@@ -7,7 +7,7 @@ use Prometheus\RenderTextFormat;
 
 /**
  * Class LpeController
- * @package Tback\PrometheusExporter
+ * @package Traum-Ferienwohnungen\PrometheusExporter
  */
 class LpeController extends Controller
 {

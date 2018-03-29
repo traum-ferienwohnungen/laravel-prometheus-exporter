@@ -1,15 +1,15 @@
 <?php
-namespace Tback\PrometheusExporter;
+namespace Traum-ferienwohnungen\PrometheusExporter;
 
 use Illuminate\Foundation\Http\Kernel;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\Application as LaravelApplication;
 use Laravel\Lumen\Application as LumenApplication;
-use Tback\PrometheusExporter\Middleware\LaravelResponseTimeMiddleware;
+use Traum-ferienwohnungen\PrometheusExporter\Middleware\LaravelResponseTimeMiddleware;
 
 /**
  * Class LpeServiceProvider
- * @package Tback\PrometheusExporter
+ * @package Traum-ferienwohnungen\PrometheusExporter
  */
 class LpeServiceProvider extends ServiceProvider
 {

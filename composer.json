@@ -1,5 +1,5 @@
 {
-    "name": "tback/laravel-prometheus-exporter",
+    "name": "traum-ferienwohnungen/laravel-prometheus-exporter",
     "description": "A prometheus exporter for the Laravel web framework",
     "keywords": ["laravel", "prometheus"],
     "type": "library",
@@ -7,18 +7,18 @@
     "authors": [
         {
             "name": "Till Backhaus",
-            "email": "till@backha.us"
+            "email": "backhaus@traum-ferienwohnungen.de"
         }
     ],
     "autoload": {
         "psr-4": {
-            "Tback\\PrometheusExporter\\": "src/"
+            "Traum-ferienwohnungen\\PrometheusExporter\\": "src/"
         }
     },
     "repositories": [
       {
         "type" : "vcs",
-        "url": "https://github.com/traum-ferienwohnungen/prometheus_client_php"
+        "url": "https://github.com/traum-ferienwohnungen/laravel-prometheus-exporter"
       }
     ],
     "require": {
@@ -33,7 +33,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Tback\\PrometheusExporter\\LpeServiceProvider"
+                "Traum-ferienwohnungen\\PrometheusExporter\\LpeServiceProvider"
             ]
         }
     }

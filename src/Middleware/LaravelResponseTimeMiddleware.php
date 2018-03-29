@@ -1,9 +1,9 @@
 <?php
-namespace Tback\PrometheusExporter\Middleware;
+namespace Traum-ferienwohnungen\PrometheusExporter\Middleware;
 
 /**
  * Class LaravelResponseTimeMiddleware
- * @package Tback\PrometheusExporter\Middleware
+ * @package Traum-ferienwohnungen\PrometheusExporter\Middleware
  */
 class LaravelResponseTimeMiddleware extends AbstractResponseTimeMiddleware
 {

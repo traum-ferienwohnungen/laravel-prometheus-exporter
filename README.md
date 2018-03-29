@@ -9,7 +9,7 @@ request method, route and response code.
 This is unreleased software. I commit backwards incompatible changes without notice. Heck, I don't even have CI setup yet.
 
 ## Installation
-`composer require tback/laravel-prometheus-exporter`
+`composer require traum-ferienwohnungen/laravel-prometheus-exporter`
 
 ### Adapters
 Then choose from two storage adapters:
@@ -30,7 +30,7 @@ In `config/app.php`
 ```
 'providers' => [
     ...
-    Tback\PrometheusExporter\LpeServiceProvider::class,
+    Traum-ferienwohnungen\PrometheusExporter\LpeServiceProvider::class,
 ];
 ```
 
@@ -39,34 +39,34 @@ In `app/Http/Kernel.php`
 ```
 protected $middleware = [
     ...
-    \Tback\PrometheusExporter\Middleware\LaravelResponseTimeMiddleware::class,
+    \Traum-ferienwohnungen\PrometheusExporter\Middleware\LaravelResponseTimeMiddleware::class,
 ];
 ```
 
 #### Add an endpoint for the metrics
 ```
-Route::get('metrics', \Tback\PrometheusExporter\LpeController::class . '@metrics');
+Route::get('metrics', \Traum-ferienwohnungen\PrometheusExporter\LpeController::class . '@metrics');
 ```
 
 ### Lumen
 #### Register the ServiceProvider
 In `bootstrap/app.php`
 ```
-$app->register(\Tback\PrometheusExporter\LpeServiceProvider::class);
+$app->register(\Traum-ferienwohnungen\PrometheusExporter\LpeServiceProvider::class);
 ```
 
 #### Enable the Middleware
 In `bootstrap/app.php`
 ```
 $app->middleware([
-    \Tback\PrometheusExporter\Middleware\LumenResponseTimeMiddleware::class
+    \Traum-ferienwohnungen\PrometheusExporter\Middleware\LumenResponseTimeMiddleware::class
 ]);
 ```
 
 #### Add an endpoint for the metrics
 In `bootstrap/app.php`
 ```
-$app->group(['namespace'=> '\Tback\PrometheusExporter'], function() use ($app){
+$app->group(['namespace'=> '\Traum-ferienwohnungen\PrometheusExporter'], function() use ($app){
     $app->get('metrics', ['as' => 'metrics', 'uses'=> 'LpeController@metrics']);
 });
 ```

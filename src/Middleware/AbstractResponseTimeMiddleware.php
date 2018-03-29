@@ -1,13 +1,13 @@
 <?php
-namespace Tback\PrometheusExporter\Middleware;
+namespace Traum-ferienwohnungen\PrometheusExporter\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Tback\PrometheusExporter\LpeManager;
+use Traum-ferienwohnungen\PrometheusExporter\LpeManager;
 
 /**
  * Class AbstractResponseTimeMiddleware
- * @package Tback\PrometheusExporter
+ * @package Traum-ferienwohnungen\PrometheusExporter
  */
 abstract class AbstractResponseTimeMiddleware
 {

@@ -1,5 +1,5 @@
 <?php
-namespace Tback\PrometheusExporter;
+namespace Traum-ferienwohnungen\PrometheusExporter;
 
 use Illuminate\Foundation\Http\Kernel;
 use Illuminate\Routing\Router;
@@ -10,7 +10,7 @@ use Prometheus\Counter;
  * Class LpeManager
  *
  * @author  Christopher Lorke <lorke@traum-ferienwohnungen.de>
- * @package Tback\PrometheusExporter
+ * @package Traum-ferienwohnungen\PrometheusExporter
  */
 class LpeManager
 {
