@@ -1,12 +1,21 @@
 <?php
-namespace Traum-ferienwohnungen\PrometheusExporter\Middleware;
+namespace traumferienwohnungen\PrometheusExporter\Middleware;
 
 /**
  * Class LaravelResponseTimeMiddleware
- * @package Traum-ferienwohnungen\PrometheusExporter\Middleware
+ * @package traumferienwohnungen\PrometheusExporter\Middleware
  */
 class LaravelResponseTimeMiddleware extends AbstractResponseTimeMiddleware
 {
+    protected function getRouteNames()
+    {
+        $routeNames = [];
+        foreach (\Route::getRoutes() as $route){
+            $routeNames[] = $route->getName() ?: "unnamed";
+        }
+        return $routeNames;
+    }
+
     /**
      * Get route name
      *

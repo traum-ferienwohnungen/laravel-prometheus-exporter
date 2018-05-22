@@ -30,7 +30,7 @@ In `config/app.php`
 ```
 'providers' => [
     ...
-    Traum-ferienwohnungen\PrometheusExporter\LpeServiceProvider::class,
+    traumferienwohnungen\PrometheusExporter\LpeServiceProvider::class,
 ];
 ```
 
@@ -39,34 +39,34 @@ In `app/Http/Kernel.php`
 ```
 protected $middleware = [
     ...
-    \Traum-ferienwohnungen\PrometheusExporter\Middleware\LaravelResponseTimeMiddleware::class,
+    \traumferienwohnungen\PrometheusExporter\Middleware\LaravelResponseTimeMiddleware::class,
 ];
 ```
 
 #### Add an endpoint for the metrics
 ```
-Route::get('metrics', \Traum-ferienwohnungen\PrometheusExporter\LpeController::class . '@metrics');
+Route::get('metrics', \traumferienwohnungen\PrometheusExporter\LpeController::class . '@metrics');
 ```
 
 ### Lumen
 #### Register the ServiceProvider
 In `bootstrap/app.php`
 ```
-$app->register(\Traum-ferienwohnungen\PrometheusExporter\LpeServiceProvider::class);
+$app->register(\traumferienwohnungen\PrometheusExporter\LpeServiceProvider::class);
 ```
 
 #### Enable the Middleware
 In `bootstrap/app.php`
 ```
 $app->middleware([
-    \Traum-ferienwohnungen\PrometheusExporter\Middleware\LumenResponseTimeMiddleware::class
+    \traumferienwohnungen\PrometheusExporter\Middleware\LumenResponseTimeMiddleware::class
 ]);
 ```
 
 #### Add an endpoint for the metrics
 In `bootstrap/app.php`
 ```
-$app->group(['namespace'=> '\Traum-ferienwohnungen\PrometheusExporter'], function() use ($app){
+$app->group(['namespace'=> '\traumferienwohnungen\PrometheusExporter'], function() use ($app){
     $app->get('metrics', ['as' => 'metrics', 'uses'=> 'LpeController@metrics']);
 });
 ```
