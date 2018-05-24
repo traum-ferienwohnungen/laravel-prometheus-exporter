@@ -4,21 +4,22 @@
 use Illuminate\Http\Request;
 use Prometheus\CollectorRegistry;
 use Prometheus\Counter;
+use Prometheus\Histogram;
 use traumferienwohnungen\PrometheusExporter\Middleware\LumenResponseTimeMiddleware;
 
 class LumenMiddlewareTest extends Orchestra\Testbench\TestCase
 {
     public function testLumenResponseTimeMiddleware()
     {
-        $counter = Mockery::mock(Counter::class);
-        $counter->shouldReceive('inc')->once();
-        $counter->shouldReceive('incBy')->once();
-        $registry = Mockery::mock(CollectorRegistry::class);
-        $registry->shouldReceive('getOrRegisterCounter')->twice()->andReturn(
-            $counter
+        $mockHistogram = Mockery::mock(Histogram::class);
+        $mockHistogram->shouldReceive('observe')->once();
+
+        $mockRegistry = Mockery::mock(CollectorRegistry::class);
+        $mockRegistry->shouldReceive('getOrRegisterHistogram')->once()->andReturn(
+            $mockHistogram
         );
 
-        $middleware = new LumenResponseTimeMiddleware($registry);
+        $middleware = new LumenResponseTimeMiddleware($mockRegistry);
 
         $request = Mockery::mock(Request::class);
         $request->shouldReceive('route')->once()->andReturn($this->getTestRouteObject());

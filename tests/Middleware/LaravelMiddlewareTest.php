@@ -5,19 +5,19 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Route;
 use Prometheus\CollectorRegistry;
-use Prometheus\Counter;
+use Prometheus\Histogram;
 use traumferienwohnungen\PrometheusExporter\Middleware\LaravelResponseTimeMiddleware;
 
 class LaravelMiddlewareTest extends Orchestra\Testbench\TestCase
 {
     public function testLaravelResponseTimeMiddleware()
     {
-        $mockCounter = Mockery::mock(Counter::class);
-        $mockCounter->shouldReceive('inc')->once();
-        $mockCounter->shouldReceive('incBy')->once();
+        $mockHistogram = Mockery::mock(Histogram::class);
+        $mockHistogram->shouldReceive('observe')->once();
+
         $mockRegistry = Mockery::mock(CollectorRegistry::class);
-        $mockRegistry->shouldReceive('getOrRegisterCounter')->twice()->andReturn(
-            $mockCounter
+        $mockRegistry->shouldReceive('getOrRegisterHistogram')->once()->andReturn(
+            $mockHistogram
         );
 
         $middleware = new LaravelResponseTimeMiddleware($mockRegistry);
