@@ -40,6 +40,12 @@ class LumenServiceProvider extends ServiceProvider
 
         switch (config('prometheus_exporter.adapter')) {
             case 'apc':
+                if ('cli' == php_sapi_name()) {
+                    if (!ini_get('apc.enable_cli') || !extension_loaded('apc')) {
+                        throw new \ErrorException(
+                            'Registered apc adapter, but apc is disabled. Set apc.enable_cli=1 to fix this');
+                    }
+                }
                 $this->app->bind('Prometheus\Storage\Adapter', 'Prometheus\Storage\APC');
                 break;
             case 'redis':
