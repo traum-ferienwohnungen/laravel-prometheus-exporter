@@ -19,4 +19,19 @@ return [
         'read_timeout'           => 10, // in seconds
         'persistent_connections' => false,
     ],
+
+    'register_global_middleware' => true,
+
+    'export_opcache_statistics' => true,
+
+    'opcache_metrics_namespace' => 'opcache',
+
+    'export_fpm_statistics' => true,
+
+    'fpm_statistics_namespace' => 'fpm',
+
+    'active_collectibles' => [
+        \traumferienwohnungen\PrometheusExporter\Instrumentation\FPM::class,
+        \traumferienwohnungen\PrometheusExporter\Instrumentation\Opcache::class,
+    ]
 ];

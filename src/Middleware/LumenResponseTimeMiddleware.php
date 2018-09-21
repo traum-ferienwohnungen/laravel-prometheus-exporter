@@ -9,18 +9,6 @@ use Illuminate\Support\Facades\Route;
 class LumenResponseTimeMiddleware extends AbstractResponseTimeMiddleware
 {
     /**
-     * @return string[]
-     */
-    protected function getRouteNames()
-    {
-        $routeNames = [];
-        foreach (Route::getRoutes() as $route) {
-            $routeNames[] = $this->extractRouteName($route['action']);
-        };
-        return array_unique($routeNames);
-    }
-
-    /**
      * Get route name
      *
      * @return string

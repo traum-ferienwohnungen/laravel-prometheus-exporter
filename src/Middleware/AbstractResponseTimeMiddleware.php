@@ -35,7 +35,7 @@ abstract class AbstractResponseTimeMiddleware
     public function __construct(CollectorRegistry $registry)
     {
         $this->registry = $registry;
-        $this->initRouteMetrics($this->getRouteNames());
+        $this->initRouteMetrics();
     }
 
     /**
@@ -64,10 +64,7 @@ abstract class AbstractResponseTimeMiddleware
         return $response;
     }
 
-    /**
-     * @param $routeNames string[]
-     */
-    public function initRouteMetrics($routeNames)
+    public function initRouteMetrics()
     {
         $namespace = config('prometheus_exporter.namespace_http_server');
         $buckets = config('prometheus_exporter.histogram_buckets');
@@ -93,11 +90,6 @@ abstract class AbstractResponseTimeMiddleware
         $labelValues = [(string)$route, (string)$method, (string) $statusCode];
         $this->requestDurationHistogram->observe($duration_milliseconds, $labelValues);
     }
-
-    /**
-     * @return string[]
-     */
-    abstract protected function getRouteNames();
 
     /**
      * Get route name
