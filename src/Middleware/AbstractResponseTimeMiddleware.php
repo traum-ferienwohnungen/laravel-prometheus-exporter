@@ -101,16 +101,6 @@ abstract class AbstractResponseTimeMiddleware
     }
 
     /**
-     * Get metric family samples
-     *
-     * @return \Prometheus\MetricFamilySamples[]
-     */
-    public function getMetricFamilySamples()
-    {
-        return $this->registry->getMetricFamilySamples();
-    }
-
-    /**
      * @return string[]
      */
     abstract protected function getRouteNames();
