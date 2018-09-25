@@ -1,16 +1,16 @@
 <?php
-namespace traumferienwohnungen\PrometheusExporter;
+
+namespace TraumFerienwohnungen\PrometheusExporter\Controller;
 
 use Illuminate\Http\Response;
-use Laravel\Lumen\Routing\Controller;
 use Prometheus\CollectorRegistry;
 use Prometheus\RenderTextFormat;
 
 /**
- * Class LaravelController
+ * Class MetricsTrait
  * @package traumferienwohnungen\PrometheusExporter
  */
-class LumenController extends Controller
+trait MetricsTrait
 {
     /**
      * metric
