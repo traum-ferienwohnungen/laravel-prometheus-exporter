@@ -18,7 +18,7 @@
 		<whitelist>
 			<directory suffix=".php">src</directory>
 			<exclude>
-				<files>src/config/config.php</files>
+				<file>src/config/config.php</file>
 			</exclude>
 		</whitelist>
 	</filter>
