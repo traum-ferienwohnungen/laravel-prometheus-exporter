@@ -41,12 +41,6 @@ Route::get('metrics', \traumferienwohnungen\PrometheusExporter\LaravelController
 ```
 
 ### Lumen
-#### Track LUMEN_START time
-In `public/index.php`
-```
-define('LUMEN_START', microtime(true));
-```
-
 #### Register the ServiceProvider
 In `bootstrap/app.php`
 ```

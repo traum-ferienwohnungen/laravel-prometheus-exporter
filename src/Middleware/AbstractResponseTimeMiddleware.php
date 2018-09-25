@@ -47,13 +47,7 @@ abstract class AbstractResponseTimeMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (defined('LARAVEL_START')){
-            $start = LARAVEL_START;
-        } elseif (defined('LUMEN_START')){
-            $start = LUMEN_START;
-        } else {
-            $start = microtime(true);
-        }
+        $start = $_SERVER['REQUEST_TIME_FLOAT'];
         $this->request = $request;
 
         /** @var \Illuminate\Http\Response $response */
