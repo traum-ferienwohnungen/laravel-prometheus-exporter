@@ -22,11 +22,7 @@ return [
 
     'register_global_middleware' => true,
 
-    'export_opcache_statistics' => true,
-
     'opcache_metrics_namespace' => 'opcache',
-
-    'export_fpm_statistics' => true,
 
     'fpm_statistics_namespace' => 'fpm',
 
