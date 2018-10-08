@@ -8,5 +8,5 @@ interface Collectible
     /**
      * @return MetricFamilySamples[]
      */
-    public function collect();
+    public function collect(): array;
 }

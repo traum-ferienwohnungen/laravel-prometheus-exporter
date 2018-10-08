@@ -9,7 +9,7 @@ class FPM implements Collectible
     /**
      * @return \Prometheus\MetricFamilySamples[]
      */
-    function collect()
+    function collect(): array
     {
         if (! function_exists('fpm_get_status')){
             return [];

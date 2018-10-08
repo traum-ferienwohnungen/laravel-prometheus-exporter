@@ -9,7 +9,7 @@ class Opcache implements Collectible
     /**
      * @return \Prometheus\MetricFamilySamples[]
      */
-    function collect()
+    function collect(): array
     {
         $opcache_status = opcache_get_status(false);
         $registry = new CollectorRegistry(new InMemory());
