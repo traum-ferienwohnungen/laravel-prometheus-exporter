@@ -1,12 +1,10 @@
 <?php
 namespace traumferienwohnungen\PrometheusExporter\Instrumentation;
 
-use Prometheus\MetricFamilySamples;
+use Prometheus\CollectorRegistry;
 
 interface Collectible
 {
-    /**
-     * @return MetricFamilySamples[]
-     */
-    public function collect(): array;
+    public function __construct(CollectorRegistry $registry);
+    public function collect(): void;
 }

@@ -4,18 +4,15 @@ namespace traumferienwohnungen\PrometheusExporter\Instrumentation;
 use Prometheus\CollectorRegistry;
 use Prometheus\Storage\InMemory;
 
-class FPM implements Collectible
+class FPM extends AbstractCollector
 {
-    /**
-     * @return \Prometheus\MetricFamilySamples[]
-     */
-    function collect(): array
+    function collect(): void
     {
         if (! function_exists('fpm_get_status')){
-            return [];
+            return;
         }
         $fpmStatus = fpm_get_status();
-        $registry = new CollectorRegistry(new InMemory());
+        $registry = $this->registry;
         $metrics_namespace = config('prometheus_exporter.fpm_metrics_namespace');
         
         $startTime = $registry->getOrRegisterGauge($metrics_namespace, 'start_time', 'start_time');
@@ -54,6 +51,5 @@ class FPM implements Collectible
             $procStartTime->set($proc['start-time'], [$proc['pid']]);
             $procRequests->set($proc['requests'], [$proc['pid']]);
         }
-        return $registry->getMetricFamilySamples();
     }
 }

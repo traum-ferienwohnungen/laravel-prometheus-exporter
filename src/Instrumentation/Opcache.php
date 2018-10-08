@@ -4,15 +4,12 @@ namespace traumferienwohnungen\PrometheusExporter\Instrumentation;
 use Prometheus\CollectorRegistry;
 use Prometheus\Storage\InMemory;
 
-class Opcache implements Collectible
+class Opcache extends AbstractCollector
 {
-    /**
-     * @return \Prometheus\MetricFamilySamples[]
-     */
-    function collect(): array
+    function collect(): void
     {
         $opcache_status = opcache_get_status(false);
-        $registry = new CollectorRegistry(new InMemory());
+        $registry = $this->registry;
         $exported_values = [
             "opcache_enabled",
             "cache_full",
@@ -51,7 +48,5 @@ class Opcache implements Collectible
             $gauge = $registry->getOrRegisterGauge(config('prometheus_exporter.opcache_metrics_namespace'), $label, "");
             $gauge->set($value);
         }
-
-        return $registry->getMetricFamilySamples();
     }
 }
