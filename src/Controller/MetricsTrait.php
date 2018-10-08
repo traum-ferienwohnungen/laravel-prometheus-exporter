@@ -30,6 +30,9 @@ trait MetricsTrait
         /** @var Collectible $collectible */
         foreach(config('prometheus_exporter.active_collectibles') as $collectible_class){
             $collectible = new $collectible_class();
+            if (! $collectible instanceof Collectible){
+               throw new \RuntimeException("$collectible_class does not implement Collectible");
+            }
             $metricFamilySamples = array_merge($metricFamilySamples, $collectible->collect());
         }
 
