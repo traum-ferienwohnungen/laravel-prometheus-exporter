@@ -3,6 +3,7 @@ namespace traumferienwohnungen\PrometheusExporter;
 
 use Illuminate\Foundation\Http\Kernel;
 use Illuminate\Support\ServiceProvider;
+use Prometheus\CollectorRegistry;
 use traumferienwohnungen\PrometheusExporter\Middleware\LaravelResponseTimeMiddleware;
 
 /**
@@ -21,10 +22,25 @@ class LaravelServiceProvider extends ServiceProvider
     {
         $source = realpath(__DIR__ . '/config/config.php');
         $this->publishes([$source => config_path('prometheus_exporter.php')]);
-        $this->mergeConfigFrom($source, 'prometheus_exporter');
 
         $kernel->pushMiddleware(LaravelResponseTimeMiddleware::class);
         $this->registerMetricsRoute();
+    }
+
+    public function config($key, $default = null)
+    {
+        return config("prometheus_exporter.$key", $default);
+    }
+
+    public function getConfigInstance($key)
+    {
+        $instance = $this->config($key);
+
+        if (is_string($instance)) {
+            return $this->app->make($instance);
+        }
+
+        return $instance;
     }
 
     /**
@@ -32,23 +48,14 @@ class LaravelServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(
-            __DIR__.'/config/config.php',
-            'prometheus_exporter'
-        );
+        $this->mergeConfigFrom(__DIR__.'/config/config.php', 'prometheus_exporter');
 
-        switch (config('prometheus_exporter.adapter')) {
-            case 'apc':
-                $this->app->bind('Prometheus\Storage\Adapter', 'Prometheus\Storage\APC');
-                break;
-            case 'redis':
-                $this->app->bind('Prometheus\Storage\Adapter', function($app){
-                    return new \Prometheus\Storage\Redis(config('prometheus_exporter.redis'));
-                });
-                break;
-            default:
-                throw new \ErrorException('"prometheus_exporter.adapter" must be either apc or redis');
-        }
+        $storageAdapter = $this->getConfigInstance('adapter');
+        $this->app->bind('Prometheus\Storage\Adapter', $storageAdapter);
+
+        $this->app->singleton(CollectorRegistry::class, function() use ($storageAdapter){
+            return new CollectorRegistry($storageAdapter);
+        });
     }
 
     public function registerMetricsRoute()

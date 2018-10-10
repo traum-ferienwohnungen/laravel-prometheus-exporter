@@ -1,6 +1,6 @@
 <?php
 
-namespace TraumFerienwohnungen\PrometheusExporter\Controller;
+namespace traumferienwohnungen\PrometheusExporter\Controller;
 
 use Illuminate\Http\Response;
 use Prometheus\CollectorRegistry;
@@ -37,9 +37,9 @@ trait MetricsTrait
             }
             $collectible->collect();
         }
-        $volatileMemorySamples = $volatileRegistry->getMetricFamilySamples();
+        $volatileMetricSamples = $volatileRegistry->getMetricFamilySamples();
 
-        return response($renderer->render(array_merge($metricFamilySamples, $volatileMemorySamples)))
+        return response($renderer->render(array_merge($metricFamilySamples, $volatileMetricSamples)))
             ->header('Content-Type', $renderer::MIME_TYPE);
     }
 }

@@ -1,10 +1,12 @@
 <?php
 
 return [
-    /*
-     * possible values are apc or redis
-     */
-    'adapter' => env('PROMETHEUS_ADAPTER', 'apc'),
+    'adapter' => \Prometheus\Storage\InMemory::class,
+
+    'active_collectibles' => [
+        \traumferienwohnungen\PrometheusExporter\Instrumentation\FPM::class,
+        \traumferienwohnungen\PrometheusExporter\Instrumentation\Opcache::class,
+    ],
 
     'namespace' => 'app',
 
@@ -25,9 +27,4 @@ return [
     'opcache_metrics_namespace' => 'opcache',
 
     'fpm_statistics_namespace' => 'fpm',
-
-    'active_collectibles' => [
-        \traumferienwohnungen\PrometheusExporter\Instrumentation\FPM::class,
-        \traumferienwohnungen\PrometheusExporter\Instrumentation\Opcache::class,
-    ]
 ];
