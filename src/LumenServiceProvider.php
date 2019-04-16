@@ -3,6 +3,10 @@ namespace traumferienwohnungen\PrometheusExporter;
 
 use Illuminate\Support\ServiceProvider;
 use Prometheus\CollectorRegistry;
+use Prometheus\Storage\Adapter;
+use Prometheus\Storage\APC;
+use Prometheus\Storage\InMemory;
+use Prometheus\Storage\Redis;
 
 /**
  * Class LumenServiceProvider
@@ -46,20 +50,23 @@ class LumenServiceProvider extends ServiceProvider
                             'Registered apc adapter, but apc is disabled. Set apc.enable_cli=1 to fix this');
                     }
                 }
-                $this->app->bind('Prometheus\Storage\Adapter', 'Prometheus\Storage\APC');
+                $this->app->bind(Adapter::class, APC::class);
                 break;
             case 'redis':
-                $this->app->bind('Prometheus\Storage\Adapter', function($app){
-                    return new \Prometheus\Storage\Redis(config('prometheus_exporter.redis'));
+                $this->app->bind(Adapter::class, function(){
+                    return new Redis(config('prometheus_exporter.redis'));
                 });
                 break;
+            case 'array':
+                $this->app->bind(Adapter::class, InMemory::class);
+                break;
             default:
-                throw new \ErrorException('"prometheus_exporter.adapter" must be either apc or redis');
+                throw new \ErrorException('"prometheus_exporter.adapter" must be either apc, redis or array');
         }
 
         $this->app->singleton(CollectorRegistry::class,
-            function ($app){
-                return new CollectorRegistry(app(\Prometheus\Storage\Adapter::class));
+            function (){
+                return new CollectorRegistry(app(Adapter::class));
             });
     }
 
