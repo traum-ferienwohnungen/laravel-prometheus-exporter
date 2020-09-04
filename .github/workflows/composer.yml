@@ -29,5 +29,10 @@ jobs:
       - name: Install dependencies
         if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer install --prefer-dist --no-progress --no-suggest
+      - name: Setup PHP with Opcache
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          ini-values: opcache.enable_cli=1, apc.enable_cli=1
       - name: Run test suite
         run: composer run-script test
