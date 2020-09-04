@@ -14,7 +14,7 @@ class LaravelControllerTest extends Orchestra\Testbench\TestCase
         $controller = new \traumferienwohnungen\PrometheusExporter\Controller\LaravelController();
         $response = $controller->metrics();
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertContains('opcache', $response->content());
+        $this->assertStringContainsString('opcache', $response->content());
     }
 
 }
