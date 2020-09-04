@@ -19,9 +19,8 @@
         "php" : "^7.4",
         "jimdo/prometheus_client_php": "^0.9.1",
         "fzaninotto/faker": "~1.7",
-        "illuminate/support": "^6",
+        "illuminate/support": "^6"
     },
-
     "extra": {
         "laravel": {
             "providers": [
