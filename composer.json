@@ -17,7 +17,7 @@
     },
     "require": {
         "php" : "^7.4",
-        "jimdo/prometheus_client_php": "^0.9.1",
+        "endclothing/prometheus_client_php": "^1",
         "fzaninotto/faker": "~1.7",
         "illuminate/support": "^6"
     },
