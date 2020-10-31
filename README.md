@@ -14,7 +14,7 @@ This is unreleased software. I commit backwards incompatible changes without not
 
 ### Adapters
 Then choose from two storage adapters:
-APCu is the default option. Redis can also be used.
+APCu is the default option. Redis can also be used. There's also `array` available for testing.
 
 #### APCu
 Ensure apcu-bc is installed and enabled.
